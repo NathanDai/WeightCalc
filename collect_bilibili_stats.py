@@ -77,8 +77,8 @@ def create_csv():
 def write_csv(video):
     with codecs.open("video_stats.csv", "a", "utf-8") as csvfile:
         writer = csv.writer(csvfile)
-        writer.writerows([[video[0], video[2], video[3], video[4], video[5], video[6], video[7], video[8],
-                           video[9], video[10], video[1]]])
+        writer.writerows([[video[0], video[1], video[2], video[3], video[4], video[5], video[6], video[7], video[8],
+                           video[9], video[10]]])
 
 
 if __name__ == "__main__":
