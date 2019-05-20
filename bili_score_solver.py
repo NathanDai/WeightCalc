@@ -2,6 +2,7 @@ import pandas as pd
 import numpy as np
 import tensorflow as tf
 # import matplotlib.pyplot as plt
+
 import matplotlib as mpl
 mpl.use('TkAgg')
 import matplotlib.pyplot as plt
@@ -13,19 +14,19 @@ from sklearn.utils import shuffle
 filename = 'video_stats.csv'
 content = pd.read_csv(filename, encoding='utf8')
 content = shuffle(content)
-train_labels = content['Pts'][:-600]
-test_labels = content['Pts'][-600:]
+train_labels = content['Pts'][:-300]
+test_labels = content['Pts'][-300:]
 
 # for i in content:
 #     print(i)
 
 train_data = [[content['View'][idx], content['Danmaku'][idx], content['Reply'][idx], content['Favorite'][idx],
                content['Coin'][idx], content['Share'][idx], content['Like'][idx]
-               ] for idx, val in enumerate(content['Pts'][:-600])]
+               ] for idx, val in enumerate(content['Pts'][:-300])]
 
 test_data = [[content['View'][idx], content['Danmaku'][idx], content['Reply'][idx], content['Favorite'][idx],
               content['Coin'][idx], content['Share'][idx], content['Like'][idx]
-              ] for idx, val in enumerate(content['Pts'][-600:])]
+              ] for idx, val in enumerate(content['Pts'][-300:])]
 
 train_data = np.array(train_data)
 test_data = np.array(test_data)
@@ -59,9 +60,11 @@ class PrintDot(keras.callbacks.Callback):
         if epoch % 100 == 0: print('')
         print('.', end='')
 
+
 EPOCHS = 500
 
 history = model.fit(train_data, train_labels, epochs=EPOCHS, validation_split=0.2, verbose=0, callbacks=[PrintDot()])
+
 
 def plot_history(history):
     plt.figure()
@@ -71,6 +74,7 @@ def plot_history(history):
     plt.plot(history.epoch, np.array(history.history['val_mean_absolute_error']), label='Val Loss')
     plt.legend()
     plt.ylim([0, 5])
+
 
 plot_history(history)
 

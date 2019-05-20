@@ -69,8 +69,6 @@ def create_csv():
         writer = csv.writer(csvfile)
         # 先写入columns_name
         writer.writerow(
-            ["标题", "视频号", "播放数", "弹幕数", "评论数", "收藏数", "投币数", "分享数", "点赞数", "不喜欢数", "综合得分"])
-        writer.writerow(
             ["Title", "Aid", "View", "Danmaku", "Reply", "Favorite", "Coin", "Share", "Like", "Dislike", "Pts"])
 
 
